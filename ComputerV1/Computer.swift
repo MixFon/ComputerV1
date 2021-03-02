@@ -6,7 +6,10 @@
 //
 
 import Foundation
-//import Darwin
+
+struct Exception: Error {
+    var massage: String
+}
 
 class Computer {
     var polindrom: Polindrom?
