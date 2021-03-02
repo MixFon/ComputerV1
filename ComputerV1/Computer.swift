@@ -38,6 +38,11 @@ class Computer {
         print(massage)
     }
     
+    private func systemError(massage: String) {
+        fputs(massage + "\n", stderr)
+        exit(-1)
+    }
+    
     private func solvingQuadraticEquations() {
         guard let polindrom = self.polindrom else { return }
         if isZeroSolution() { return }
@@ -158,7 +163,6 @@ class Computer {
 
     private func checkPolindrom(polindrom: String) throws {
         let polindrom = polindrom.uppercased().removeWhitespace()
-        //print(polindrom, terminator: " ")
         let firstChar = polindrom.first
         let lastChar = polindrom.last
         if firstChar == "*" || firstChar == "^" || firstChar == "." {
@@ -172,6 +176,9 @@ class Computer {
         }
         if !checkExtraneousCharacters(cheking: polindrom, source: " +-*^X=1234567890.") {
             throw Exception(massage: "Invalid character.")
+        }
+        if !checkMultyX(polindrom: polindrom) {
+            throw Exception(massage: "Invalid syntax.")
         }
         for (i, c) in polindrom.enumerated() {
             if c == "^" {
@@ -195,6 +202,17 @@ class Computer {
                 }
             }
         }
+    }
+    
+    private func checkMultyX(polindrom: String) -> Bool {
+        let polinomsLiftRight = Polindrom.getLeftRightPolinoms(polindrom: polindrom)
+        let monoms = polinomsLiftRight.0 + polinomsLiftRight.1
+        for monom in monoms {
+            if monom.filter({ $0 == "X" || $0 == "*"  }).count > 1 {
+                return false
+            }
+        }
+        return true
     }
 
     private func checkExtraneousCharacters(cheking: String, source: String) -> Bool {

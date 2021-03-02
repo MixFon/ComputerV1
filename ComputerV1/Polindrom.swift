@@ -14,36 +14,17 @@ class Polindrom: NSObject {
     
     init(polindrom: String) {
         super.init()
-        var withoutWhitespace = polindrom.removeWhitespace().uppercased()
-        if !withoutWhitespace.contains("=") {
-            withoutWhitespace += "=0"
-        }
-        if withoutWhitespace.first == "=" {
-            withoutWhitespace = "0" + withoutWhitespace
-        }
-        if withoutWhitespace.last == "=" {
-            withoutWhitespace += "0"
-        }
-        let polindromStringArray = withoutWhitespace.split() {$0 == "="}.map{ String($0) }
-        //print(polindromStringArray)
-        let leftPolindrom = addSpaceBeforePlus(polindromString: polindromStringArray[0])
-        let rightPolindrom = addSpaceBeforePlus(polindromString: polindromStringArray[1])
-        let arrMonomsLeft = leftPolindrom.split() { $0 == " " }.map{ String($0)}
-        let arrMonomsRight = rightPolindrom.split() { $0 == " " }.map{ String($0)}
-        //print(arrMonomsLeft)
-        //print(arrMonomsRight)
+        let polinomsLiftRight = Polindrom.getLeftRightPolinoms(polindrom: polindrom)
         var polindrom = [Monom]()
-        for monom in arrMonomsLeft {
+        for monom in polinomsLiftRight.0 {
             polindrom.append(Monom(monom: monom))
         }
-        for monom in arrMonomsRight {
+        for monom in polinomsLiftRight.1 {
             let temp = Monom(monom: monom)
             temp.coefficient = -temp.coefficient
             polindrom.append(temp)
         }
         monoms = reductionSuchTerms(polindrom: polindrom)
-        //print("\(monoms)")
-        //print(getReducedForm())
     }
     
     private func reductionSuchTerms(polindrom: [Monom]) -> [Monom] {
@@ -77,8 +58,26 @@ class Polindrom: NSObject {
     func getPolynominalDegree() -> Int {
         return (monoms.first?.degree ?? 0)
     }
+    static func getLeftRightPolinoms(polindrom: String) -> ([String], [String]) {
+        var withoutWhitespace = polindrom.removeWhitespace().uppercased()
+        if !withoutWhitespace.contains("=") {
+            withoutWhitespace += "=0"
+        }
+        if withoutWhitespace.first == "=" {
+            withoutWhitespace = "0" + withoutWhitespace
+        }
+        if withoutWhitespace.last == "=" {
+            withoutWhitespace += "0"
+        }
+        let polindromStringArray = withoutWhitespace.split() {$0 == "="}.map{ String($0) }
+        let leftPolindrom = addSpaceBeforePlus(polindromString: polindromStringArray[0])
+        let rightPolindrom = addSpaceBeforePlus(polindromString: polindromStringArray[1])
+        let arrMonomsLeft = leftPolindrom.split() { $0 == " " }.map{ String($0)}
+        let arrMonomsRight = rightPolindrom.split() { $0 == " " }.map{ String($0)}
+        return (arrMonomsLeft, arrMonomsRight)
+    }
     
-    private func addSpaceBeforePlus(polindromString: String) -> String {
+    static func addSpaceBeforePlus(polindromString: String) -> String {
         var string = String()
         for char in polindromString {
             if char == "+" || char == "-" {
