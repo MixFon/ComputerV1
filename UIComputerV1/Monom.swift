@@ -17,7 +17,6 @@ class Monom: NSObject {
     }
     
     init(monom: String) {
-       // print(monom, terminator: " ")
         coefficient = 0
         degree = 0
         super.init()
@@ -29,11 +28,8 @@ class Monom: NSObject {
         } else {
             coefficient = Double(monom) ?? 0.0
             degree = 0
-            //print(self)
             return
-            //elements = monom.split() {$0 == "X"}.map{ String($0) }
         }
-        //print(elements, terminator: " ")
         let count = elements.count
         switch count {
         case 0:
@@ -46,8 +42,6 @@ class Monom: NSObject {
         default:
             break
         }
-        //print(self.coefficient)
-        //print(self)
     }
     
     override var description: String { return "\(String(format: "%+1g", coefficient))" +
@@ -93,7 +87,6 @@ class Monom: NSObject {
     }
     
     private func workingCoeficient(coeficient: String) {
-        //print("Coeff = \(coeficient)")
         guard let char = coeficient.first else { print("Error!!! Character."); return }
         switch char {
         case "+":
@@ -126,20 +119,3 @@ class Monom: NSObject {
         }
     }
 }
-
-//var monom = Monom(monom: "X^2*-4")
-//monom = Monom(monom: "+4X^2")
-//monom = Monom(monom: "-X^2")
-//monom = Monom(monom: "+X^2")
-//monom = Monom(monom: "X^2")
-//monom = Monom(monom: "-4")
-//monom = Monom(monom: "+4")
-//monom = Monom(monom: "-X")
-//monom = Monom(monom: "+X")
-//monom = Monom(monom: "X")
-//monom = Monom(monom: "+4X")
-//monom = Monom(monom: "-X")
-//monom = Monom(monom: "-4X")
-//monom = Monom(monom: "4X")
-//print(monom)
-//print(Int("+") ?? 0)

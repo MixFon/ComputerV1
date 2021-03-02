@@ -57,16 +57,6 @@ class Computer: NSViewController {
         scrollText.textColor = .controlTextColor
         scrollText.string += massage + "\n"
     }
-    /*
-     private func printOutput(massage: String) {
-         print(massage)
-     }
-     
-     func systemError(massage: String) {
-         fputs(massage + "\n", stderr)
-         exit(-1)
-     }
-     */
     
     private func solvingQuadraticEquations() {
         guard let polindrom = self.polindrom else { return }
