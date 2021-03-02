@@ -6,17 +6,28 @@
 //
 
 import Foundation
+import Cocoa
 
 struct Exception: Error {
     var massage: String
 }
 
-class Computer {
+class Computer: NSViewController {
     var polindrom: Polindrom?
     
-    init() {
-        let polindromString = gerArgumentCommandLine()
-        checkErrors(polingrom: polindromString)
+    @IBOutlet var scrollText: NSTextView!
+    @IBOutlet weak var scrollView: NSScrollView!
+    
+    @IBOutlet weak var textField: NSTextField!
+    @IBOutlet weak var saveHistory: NSButton!
+    
+    @IBAction func pressCalculate(_ sender: NSButton) {
+        guard let polindromString = textField.cell?.title else { return }
+        if polindromString.isEmpty { return }
+        if saveHistory.state.rawValue == 0 {
+            scrollText.string = ""
+        }
+        if checkErrors(polingrom: polindromString) { return }
         polindrom = Polindrom(polindrom: polindromString)
         guard let polindrom = self.polindrom else { return }
         if polindrom.monoms.isEmpty {
@@ -37,14 +48,25 @@ class Computer {
         }
     }
     
-    private func printOutput(massage: String) {
-        print(massage)
-    }
-    
     private func systemError(massage: String) {
-        fputs(massage + "\n", stderr)
-        exit(-1)
+        scrollText.textColor = .red
+        scrollText.string += massage + "\n"
     }
+
+    private func printOutput(massage: String) {
+        scrollText.textColor = .controlTextColor
+        scrollText.string += massage + "\n"
+    }
+    /*
+     private func printOutput(massage: String) {
+         print(massage)
+     }
+     
+     func systemError(massage: String) {
+         fputs(massage + "\n", stderr)
+         exit(-1)
+     }
+     */
     
     private func solvingQuadraticEquations() {
         guard let polindrom = self.polindrom else { return }
@@ -156,12 +178,14 @@ class Computer {
         printOutput(massage: "Polynomial degree: \(polindrom.getPolynominalDegree())")
     }
     
-    private func checkErrors(polingrom: String) {
+    private func checkErrors(polingrom: String) -> Bool {
         do {
             try checkPolindrom(polindrom: polingrom)
         } catch let exception as Exception {
             systemError(massage: exception.massage)
+            return true
         } catch {}
+        return false
     }
 
     private func checkPolindrom(polindrom: String) throws {

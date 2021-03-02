@@ -87,6 +87,7 @@ class Polindrom: NSObject {
         }
         return string
     }
+    
 }
 
 extension String {
