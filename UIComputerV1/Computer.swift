@@ -104,21 +104,21 @@ class Computer: NSViewController {
         let b = polindrom.monoms[1].coefficient
         let k = polindrom.monoms[0].coefficient
         printOutput(massage: "The solution is:")
-        outputLinearSolution(b, k)
+        outputLinearSolution(-b, k)
     }
     
     private func outputLinearSolution(_ b: Double, _ k: Double) {
         if isIntegerNumber(number: b) && isIntegerNumber(number: k) {
             printRationalView(coefB: b, coefK: k)
         } else {
-            printOutput(massage: String(format: "%g", -b / k))
+            printOutput(massage: String(format: "%g", b / k))
         }
     }
     
     private func printRationalView(coefB: Double, coefK: Double) {
         var b = coefB
         var k = coefK
-        let sign = b / -k
+        let sign = b / k
         b = fabs(b)
         k = fabs(k)
         let nod = nodNunbers(one: Int(b), two: Int(k))
