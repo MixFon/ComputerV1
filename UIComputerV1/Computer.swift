@@ -240,6 +240,4 @@ class Computer: NSViewController {
         }
         return true
     }
-
-    
 }
