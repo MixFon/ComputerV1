@@ -44,6 +44,7 @@ class Computer: NSViewController {
         case 2:
             solvingQuadraticEquations()
         default:
+            printOutput(massage: "The polynomial degree is strictly greater than 2, I can't solve.")
             break
         }
     }
@@ -80,8 +81,8 @@ class Computer: NSViewController {
             printOutput(massage: "The quadratic equation has no valid solution.")
             return
         } else if disctiminant == 0 {
-            printOutput(massage: "0")
-            outputLinearSolution(b, a)
+            outputLinearSolution(-b - sqrt(disctiminant), 2 * a)
+            return
         }
         outputLinearSolution(-b - sqrt(disctiminant), 2 * a)
         outputLinearSolution(-b + sqrt(disctiminant), 2 * a)
