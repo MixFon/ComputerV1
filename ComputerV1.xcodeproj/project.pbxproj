@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		292C11EC25E23F8F00BE5EEE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292C11EB25E23F8F00BE5EEE /* main.swift */; };
-		29834F2225E6AE71000653EC /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29834F2125E6AE71000653EC /* Exception.swift */; };
 		29834F2525E6AF3C000653EC /* Polindrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29834F2425E6AF3C000653EC /* Polindrom.swift */; };
 		29834F2825E6AF89000653EC /* Monom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29834F2725E6AF89000653EC /* Monom.swift */; };
 		2991B02A25EBFC35002635F3 /* Computer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2991B02925EBFC35002635F3 /* Computer.swift */; };
@@ -29,7 +28,6 @@
 /* Begin PBXFileReference section */
 		292C11E825E23F8F00BE5EEE /* ComputerV1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ComputerV1; sourceTree = BUILT_PRODUCTS_DIR; };
 		292C11EB25E23F8F00BE5EEE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; usesTabs = 1; wrapsLines = 1; };
-		29834F2125E6AE71000653EC /* Exception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exception.swift; sourceTree = "<group>"; };
 		29834F2425E6AF3C000653EC /* Polindrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polindrom.swift; sourceTree = "<group>"; };
 		29834F2725E6AF89000653EC /* Monom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monom.swift; sourceTree = "<group>"; };
 		2991B02925EBFC35002635F3 /* Computer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Computer.swift; sourceTree = "<group>"; };
@@ -66,7 +64,6 @@
 			isa = PBXGroup;
 			children = (
 				292C11EB25E23F8F00BE5EEE /* main.swift */,
-				29834F2125E6AE71000653EC /* Exception.swift */,
 				29834F2425E6AF3C000653EC /* Polindrom.swift */,
 				29834F2725E6AF89000653EC /* Monom.swift */,
 				2991B02925EBFC35002635F3 /* Computer.swift */,
@@ -135,7 +132,6 @@
 				29834F2525E6AF3C000653EC /* Polindrom.swift in Sources */,
 				2991B02A25EBFC35002635F3 /* Computer.swift in Sources */,
 				292C11EC25E23F8F00BE5EEE /* main.swift in Sources */,
-				29834F2225E6AE71000653EC /* Exception.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
