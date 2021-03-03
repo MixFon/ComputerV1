@@ -203,6 +203,24 @@ echo "${string}"
 echo "Answer 2"
 echo 
 
+string="x^2+18x+81-72x+8x^2=0"
+echo "${string}"
+./computer "$string"
+echo "Answer -3"
+echo 
+
+string="4x^2+12x+9=0"
+echo "${string}"
+./computer "$string"
+echo "Answer 3/2"
+echo 
+
+string="9x^2+12x+4=0"
+echo "${string}"
+./computer "$string"
+echo "Answer 3/2"
+echo 
+
 # checkErrors(polingrom: "=3 + 4 + 4 * X^0 + 3=")
 # checkErrors(polingrom: "3 + 4 + 4 * x^0 + 3=")
 # checkErrors(polingrom: "3 + 4X^2 + 4 * x^0 + 3=")
