@@ -16,9 +16,17 @@ do
 	then 
 	let "a = -$a"
 	fi
-	string="$a X^2 -$b X +$c = $d X^2 -$e X +$f"
+	let "b = -$b"
+	let "e = -$e"
+	string="$a X^2 $b X +$c = $d X^2 $e X +$f"
 	echo $string 
 	./computer "$string"
+	echo "Ansver:"
+	A=$( echo "($a -($d))" | bc)
+	B=$( echo "($b -($e))" | bc)
+	C=$( echo "($c -($f))" | bc)
+	echo "( -1 * ($B) - sqrt(($B * ($B)) -4*($A)*($C))) / (2 * ($A)) " | bc -l
+	echo "( -1 * ($B) + sqrt(($B * ($B)) -4*($A)*($C))) / (2 * ($A)) " | bc -l
 	let "count += 1"
 	echo 
 done
