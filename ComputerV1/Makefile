@@ -6,7 +6,7 @@
 #    By: widraugr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/29 13:07:44 by widraugr          #+#    #+#              #
-#    Updated: 2021/03/02 20:00:55 by mixfon           ###   ########.fr        #
+#    Updated: 2021/03/03 18:55:31 by mixfon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,4 +25,4 @@ $(NAME):
 clean:
 	/bin/rm -f $(NAME)
 	
-re: fclean all 
+re: clean all 

@@ -218,7 +218,7 @@ echo
 string="9x^2+12x+4=0"
 echo "${string}"
 ./computer "$string"
-echo "Answer 3/2"
+echo "Answer 2/3"
 echo 
 
 # checkErrors(polingrom: "=3 + 4 + 4 * X^0 + 3=")

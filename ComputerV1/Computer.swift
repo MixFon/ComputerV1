@@ -33,7 +33,7 @@ class Computer {
         case 2:
             solvingQuadraticEquations()
         default:
-            print("The polynomial degree is strictly greater than 2, I can't solve.")
+            printOutput(massage: "The polynomial degree is strictly greater than 2, I can't solve.")
             break
         }
     }
