@@ -20,7 +20,7 @@ class Computer: NSViewController {
     
     @IBOutlet weak var textField: NSTextField!
     @IBOutlet weak var saveHistory: NSButton!
-    
+
     @IBAction func pressCalculate(_ sender: NSButton) {
         guard let polindromString = textField.cell?.title else { return }
         if polindromString.isEmpty { return }
@@ -28,9 +28,12 @@ class Computer: NSViewController {
             scrollText.string = ""
         }
         if checkErrors(polingrom: polindromString) { return }
+        //checkErrors(polingrom: polindromString)
         polindrom = Polindrom(polindrom: polindromString)
         guard let polindrom = self.polindrom else { return }
         if polindrom.monoms.isEmpty {
+            printOutput(massage: "Reduced form: 0=0")
+            printOutput(massage: "Polynomial degree: 0")
             printOutput(massage: "Each real number is a solution.")
             return
         }
@@ -78,14 +81,22 @@ class Computer: NSViewController {
         }
         let disctiminant = b * b - 4.0 * a * c
         if disctiminant < 0 {
-            printOutput(massage: "The quadratic equation has no valid solution.")
+            printOutput(massage: "Discriminant is strictly negative, the two imaginary solutions are:")
+            outputImaginarySolution(a, b, fabs(disctiminant))
             return
         } else if disctiminant == 0 {
+            printOutput(massage: "The discriminant is zero, one solution:")
             outputLinearSolution(-b - sqrt(disctiminant), 2 * a)
             return
         }
+        printOutput(massage: "Discriminant is strictly positive, the two solutions are:")
         outputLinearSolution(-b - sqrt(disctiminant), 2 * a)
         outputLinearSolution(-b + sqrt(disctiminant), 2 * a)
+    }
+    
+    private func outputImaginarySolution(_ a: Double, _ b: Double, _ d: Double) {
+        printOutput(massage: String(format: "%g %+gi", b / (2.0 * a), sqrt(d) / (2.0 * a)))
+        printOutput(massage: String(format: "%g %+gi", b / (2.0 * a), (-1.0) * sqrt(d) / (2.0 * a)))
     }
     
     private func isZeroSolution() -> Bool {
@@ -95,6 +106,16 @@ class Computer: NSViewController {
             printOutput(massage: "0")
             return true
         }
+        return false
+    }
+    
+    private func checkErrors(polingrom: String) -> Bool {
+        do {
+            try checkPolindrom(polindrom: polingrom)
+        } catch let exception as Exception {
+            systemError(massage: exception.massage)
+            return true
+        } catch {}
         return false
     }
     
@@ -148,7 +169,10 @@ class Computer: NSViewController {
     }
     
     private func isIntegerNumber(number: Double) -> Bool {
-        return Double(Int(number)) == number
+        guard let temp = Int(exactly: number) else {
+            return false
+        }
+        return Double(temp) == number
     }
     
     private func gerArgumentCommandLine() -> String {
@@ -168,16 +192,6 @@ class Computer: NSViewController {
         printOutput(massage: "Reduced form: \(polindrom.getReducedForm())=0")
         printOutput(massage: "Polynomial degree: \(polindrom.getPolynominalDegree())")
     }
-    
-    private func checkErrors(polingrom: String) -> Bool {
-        do {
-            try checkPolindrom(polindrom: polingrom)
-        } catch let exception as Exception {
-            systemError(massage: exception.massage)
-            return true
-        } catch {}
-        return false
-    }
 
     private func checkPolindrom(polindrom: String) throws {
         let polindrom = polindrom.uppercased().removeWhitespace()
@@ -194,9 +208,6 @@ class Computer: NSViewController {
         }
         if !checkExtraneousCharacters(cheking: polindrom, source: " +-*^X=1234567890.") {
             throw Exception(massage: "Invalid character.")
-        }
-        if !checkMultyX(polindrom: polindrom) {
-            throw Exception(massage: "Invalid syntax.")
         }
         for (i, c) in polindrom.enumerated() {
             if c == "^" {
@@ -220,14 +231,44 @@ class Computer: NSViewController {
                 }
             }
         }
+        if !checkMultyX(polindrom: polindrom) {
+            throw Exception(massage: "Invalid syntax monom.")
+        }
     }
     
     private func checkMultyX(polindrom: String) -> Bool {
         let polinomsLiftRight = Polindrom.getLeftRightPolinoms(polindrom: polindrom)
         let monoms = polinomsLiftRight.0 + polinomsLiftRight.1
         for monom in monoms {
-            if monom.filter({ $0 == "X" || $0 == "*"  }).count > 1 {
+            if monom.count == 1 {
+                if "+-".contains(monom) {
+                    return false
+                }
+            }
+            if monom.filter({ $0 == "X" }).count > 1 {
                 return false
+            }
+            if monom.filter({ $0 == "*" }).count > 1 {
+                return false
+            }
+            if monom.filter({ $0 == "." }).count > 1 {
+                return false
+            }
+            if monom.last != "X" {
+                for (i ,c) in monom.enumerated() {
+                    if c == "X" {
+                        let charAfter = monom[monom.index(monom.startIndex, offsetBy: i + 1)]
+                        if charAfter != "^" {
+                            return false
+                        }
+                    }
+                }
+            }
+            if monom.contains("^") {
+                let splitDegree = monom.split() { $0 == "^" }.map{String($0)}
+                guard Int(splitDegree[1]) != nil else {
+                    return false
+                }
             }
         }
         return true
