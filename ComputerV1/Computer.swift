@@ -224,7 +224,6 @@ class Computer {
     private func checkMultyX(polindrom: String) -> Bool {
         let polinomsLiftRight = Polindrom.getLeftRightPolinoms(polindrom: polindrom)
         let monoms = polinomsLiftRight.0 + polinomsLiftRight.1
-        print(monoms)
         for monom in monoms {
             if monom.count == 1 {
                 if "+-".contains(monom) {
