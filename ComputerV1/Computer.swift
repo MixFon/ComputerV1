@@ -224,7 +224,13 @@ class Computer {
     private func checkMultyX(polindrom: String) -> Bool {
         let polinomsLiftRight = Polindrom.getLeftRightPolinoms(polindrom: polindrom)
         let monoms = polinomsLiftRight.0 + polinomsLiftRight.1
+        print(monoms)
         for monom in monoms {
+            if monom.count == 1 {
+                if "=-".contains(monom) {
+                    return false
+                }
+            }
             if monom.filter({ $0 == "X" }).count > 1 {
                 return false
             }
