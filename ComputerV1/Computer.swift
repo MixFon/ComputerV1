@@ -227,7 +227,7 @@ class Computer {
         print(monoms)
         for monom in monoms {
             if monom.count == 1 {
-                if "=-".contains(monom) {
+                if "+-".contains(monom) {
                     return false
                 }
             }
