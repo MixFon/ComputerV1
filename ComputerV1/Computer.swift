@@ -20,6 +20,8 @@ class Computer {
         polindrom = Polindrom(polindrom: polindromString)
         guard let polindrom = self.polindrom else { return }
         if polindrom.monoms.isEmpty {
+            printOutput(massage: "Reduced form: 0=0")
+            printOutput(massage: "Polynomial degree: 0")
             printOutput(massage: "Each real number is a solution.")
             return
         }
@@ -66,14 +68,22 @@ class Computer {
         }
         let disctiminant = b * b - 4.0 * a * c
         if disctiminant < 0 {
-            printOutput(massage: "The quadratic equation has no valid solution.")
+            printOutput(massage: "Discriminant is strictly negative, the two imaginary solutions are:")
+            outputImaginarySolution(a, b, fabs(disctiminant))
             return
         } else if disctiminant == 0 {
+            printOutput(massage: "The discriminant is zero, one solution:")
             outputLinearSolution(-b - sqrt(disctiminant), 2 * a)
             return
         }
+        printOutput(massage: "Discriminant is strictly positive, the two solutions are:")
         outputLinearSolution(-b - sqrt(disctiminant), 2 * a)
         outputLinearSolution(-b + sqrt(disctiminant), 2 * a)
+    }
+    
+    private func outputImaginarySolution(_ a: Double, _ b: Double, _ d: Double) {
+        printOutput(massage: String(format: "%g %+gi", b / (2.0 * a), sqrt(d) / (2.0 * a)))
+        printOutput(massage: String(format: "%g %+gi", b / (2.0 * a), (-1.0) * sqrt(d) / (2.0 * a)))
     }
     
     private func isZeroSolution() -> Bool {
@@ -214,7 +224,6 @@ class Computer {
     private func checkMultyX(polindrom: String) -> Bool {
         let polinomsLiftRight = Polindrom.getLeftRightPolinoms(polindrom: polindrom)
         let monoms = polinomsLiftRight.0 + polinomsLiftRight.1
-        print(monoms)
         for monom in monoms {
             if monom.filter({ $0 == "X" }).count > 1 {
                 return false
