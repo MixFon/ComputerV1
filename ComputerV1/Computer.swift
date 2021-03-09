@@ -136,7 +136,10 @@ class Computer {
     }
     
     private func isIntegerNumber(number: Double) -> Bool {
-        return Double(Int(number)) == number
+        guard let temp = Int(exactly: number) else {
+            return false
+        }
+        return Double(temp) == number
     }
     
     private func gerArgumentCommandLine() -> String {
