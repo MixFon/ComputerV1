@@ -181,9 +181,6 @@ class Computer {
         if !checkExtraneousCharacters(cheking: polindrom, source: " +-*^X=1234567890.") {
             throw Exception(massage: "Invalid character.")
         }
-        if !checkMultyX(polindrom: polindrom) {
-            throw Exception(massage: "Invalid syntax.")
-        }
         for (i, c) in polindrom.enumerated() {
             if c == "^" {
                 let charBefore = polindrom[polindrom.index(polindrom.startIndex, offsetBy: i - 1)]
@@ -206,14 +203,40 @@ class Computer {
                 }
             }
         }
+        if !checkMultyX(polindrom: polindrom) {
+            throw Exception(massage: "Invalid syntax monom.")
+        }
     }
     
     private func checkMultyX(polindrom: String) -> Bool {
         let polinomsLiftRight = Polindrom.getLeftRightPolinoms(polindrom: polindrom)
         let monoms = polinomsLiftRight.0 + polinomsLiftRight.1
+        print(monoms)
         for monom in monoms {
-            if monom.filter({ $0 == "X" || $0 == "*"  }).count > 1 {
+            if monom.filter({ $0 == "X" }).count > 1 {
                 return false
+            }
+            if monom.filter({ $0 == "*" }).count > 1 {
+                return false
+            }
+            if monom.filter({ $0 == "." }).count > 1 {
+                return false
+            }
+            if monom.last != "X" {
+                for (i ,c) in monom.enumerated() {
+                    if c == "X" {
+                        let charAfter = monom[monom.index(monom.startIndex, offsetBy: i + 1)]
+                        if charAfter != "^" {
+                            return false
+                        }
+                    }
+                }
+            }
+            if monom.contains("^") {
+                let splitDegree = monom.split() { $0 == "^" }.map{String($0)}
+                guard Int(splitDegree[1]) != nil else {
+                    return false
+                }
             }
         }
         return true

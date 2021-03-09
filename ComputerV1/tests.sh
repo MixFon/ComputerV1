@@ -91,6 +91,11 @@ echo "${string}"
 ./computer "$string"
 echo 
 
+string="X^2 + 2*x^2 - 32*x^3.2"
+echo "${string}"
+./computer "$string"
+echo 
+
 echo '-------- No solution --------'
 
 string="4"

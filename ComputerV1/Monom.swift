@@ -36,7 +36,7 @@ class Monom: NSObject {
             coefficient = 1
             degree = 1
         case 1:
-            self.oneCountElement(elem: elements[0])
+            try? self.oneCountElement(elem: elements[0])
         case 2:
             self.twoCountElement(elements: elements)
         default:
@@ -47,7 +47,7 @@ class Monom: NSObject {
     override var description: String { return "\(String(format: "%+1g", coefficient))" +
         String(degree == 0 ? "": degree == 1 ? "X": "X^\(self.degree)") }
     
-    private func oneCountElement(elem: String) {
+    private func oneCountElement(elem: String) throws {
         guard let char = elem.first else { print("Error!!! Character."); return }
         degree = 1
         switch char {
@@ -66,7 +66,10 @@ class Monom: NSObject {
         case "^":
             let digit = elem.dropFirst()
             coefficient = 1
-            degree = Int(digit) ?? 0
+            guard let degree = Int(digit) else {
+                throw Exception(massage: "The degree in not an integer.")
+            }
+            self.degree = degree
         default:
             coefficient = Double(elem) ?? 0
         }
@@ -105,12 +108,17 @@ class Monom: NSObject {
             coefficient = Double(coeficient) ?? 0
         }
     }
+    
     private func workingDegree(degree: String) {
         guard let char = degree.first else { print("Error!!! Character."); return }
         switch char {
         case "X":
-            let index = degree.index(degree.startIndex, offsetBy: 2)
-            self.degree = Int(degree[index...]) ?? 0
+            if degree.count > 1 {
+                let index = degree.index(degree.startIndex, offsetBy: 2)
+                self.degree = Int(degree[index...]) ?? 0
+            } else {
+                self.degree = 1
+            }
         case "^":
             let index = degree.index(degree.startIndex, offsetBy: 1)
             self.degree = Int(degree[index...]) ?? 0
