@@ -58,6 +58,7 @@ class Polindrom: NSObject {
     func getPolynominalDegree() -> Int {
         return (monoms.first?.degree ?? 0)
     }
+    
     static func getLeftRightPolinoms(polindrom: String) -> ([String], [String]) {
         var withoutWhitespace = polindrom.removeWhitespace().uppercased()
         if !withoutWhitespace.contains("=") {
