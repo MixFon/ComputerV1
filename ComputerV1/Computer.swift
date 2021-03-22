@@ -69,21 +69,40 @@ class Computer {
         let disctiminant = b * b - 4.0 * a * c
         if disctiminant < 0 {
             printOutput(massage: "Discriminant is strictly negative, the two imaginary solutions are:")
-            outputImaginarySolution(a, b, fabs(disctiminant))
+            outputImaginarySolution(a, b, myFabs(disctiminant))
             return
         } else if disctiminant == 0 {
             printOutput(massage: "The discriminant is zero, one solution:")
-            outputLinearSolution(-b - sqrt(disctiminant), 2 * a)
+            outputLinearSolution(-b - mySqrt(disctiminant), 2 * a)
             return
         }
         printOutput(massage: "Discriminant is strictly positive, the two solutions are:")
-        outputLinearSolution(-b - sqrt(disctiminant), 2 * a)
-        outputLinearSolution(-b + sqrt(disctiminant), 2 * a)
+        outputLinearSolution(-b - mySqrt(disctiminant), 2 * a)
+        outputLinearSolution(-b + mySqrt(disctiminant), 2 * a)
     }
     
     private func outputImaginarySolution(_ a: Double, _ b: Double, _ d: Double) {
-        printOutput(massage: String(format: "%g %+gi", b / (2.0 * a), sqrt(d) / (2.0 * a)))
-        printOutput(massage: String(format: "%g %+gi", b / (2.0 * a), (-1.0) * sqrt(d) / (2.0 * a)))
+        printOutput(massage: String(format: "%g %+gi", b / (2.0 * a), mySqrt(d) / (2.0 * a)))
+        printOutput(massage: String(format: "%g %+gi", b / (2.0 * a), (-1.0) * mySqrt(d) / (2.0 * a)))
+    }
+    
+    
+    private func mySqrt(_ source: Double) -> Double {
+        var temp = Double(0)
+        var sqrt = Double(0)
+        sqrt = source / Double(2)
+        while sqrt != temp {
+            temp = sqrt
+            sqrt = (source / temp + temp) / 2.0
+        }
+        return sqrt
+    }
+    
+    private func myFabs(_ source: Double) -> Double {
+        if source < 0 {
+            return -source
+        }
+        return source
     }
     
     private func isZeroSolution() -> Bool {
@@ -117,8 +136,8 @@ class Computer {
         var b = coefB
         var k = coefK
         let sign = b / k
-        b = fabs(b)
-        k = fabs(k)
+        b = myFabs(b)
+        k = myFabs(k)
         let nod = nodNunbers(one: Int(b), two: Int(k))
         b = b / Double(nod)
         k = k / Double(nod)
