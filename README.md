@@ -10,12 +10,12 @@
 * два вещественных корня
 * два комплексных корня
 
-# Компиляция
+## Компиляция
     git clone https://github.com/MixFon/ComputerV1.git
     cd ComputerV1/ComputerV1
     make
 
-# Применение
+## Применение
     ./computer "2x^2+3x+6=0"
     > Reduced form: 2X^2+3X+6=0
     > Polynomial degree: 2
@@ -47,7 +47,7 @@
     > The discriminant is zero, one solution:
     > -1/2 (-0.5)
 
-# Оконный режим
+## Оконный режим
 Для запуска оконного режима необходима среда разработки XCode.
 
     git clone https://github.com/MixFon/ComputerV1.git
@@ -62,3 +62,5 @@
 
 ![image_2](https://github.com/MixFon/ComputerV1/blob/master/images/gKzKzlRL8HA.jpg)
 
+## Ссылка на страничку проекта
+https://paper.dropbox.com/doc/Computor-v1--BH4yQITVxE0zJxUtrym4ZSXpAQ-hIYWniVSkOGb0HL37F2sj 
