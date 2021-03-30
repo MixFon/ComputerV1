@@ -54,4 +54,9 @@
     cd ComputerV1
     git checkout UIComputerV1
     open UIComputerV1.xcodeproj
+    
+
+![image_error](https://github.com/MixFon/ComputerV1/blob/master/images/Bz0sVzutA6g.jpg)
+![image_1](https://github.com/MixFon/ComputerV1/blob/master/images/GhwkFiVLMNc.jpg)
+![image_2](https://github.com/MixFon/ComputerV1/blob/master/images/gKzKzlRL8HA.jpg)
 
