@@ -11,6 +11,38 @@
 * два комплексных корня
 
 # Компиляция
-`git clone https://github.com/MixFon/ComputerV1.git
-cd ComputerV1/ComputerV1
-make`
+    git clone https://github.com/MixFon/ComputerV1.git
+    cd ComputerV1/ComputerV1
+    make
+
+# Применение
+    ./computer "2x^2+3x+6=0"
+    > Reduced form: 2X^2+3X+6=0
+    > Polynomial degree: 2
+    > Discriminant is strictly negative, the two imaginary solutions are:
+    > 0.75 +1.56125i
+    > 0.75 -1.56125i
+    
+    ./computer "1.6x-3.2=0"
+    > Reduced form: 1.6X-3.2=0
+    > Polynomial degree: 1
+    > The solution is:
+    > 2
+    
+    ./computer "4.5x^3+3.53x^2-1.4x+3=0"
+    > Reduced form: 4.5X^3+3.53X^2-1.4X+3=0
+    > Polynomial degree: 3
+    > The polynomial degree is strictly greater than 2, I can't solve.
+    
+    ./computer "2.4x^2-x+3.5+64.6x^3=64.6x^3"
+    > Reduced form: 2.4X^2-1X+3.5=0
+    > Polynomial degree: 2
+    > Discriminant is strictly negative, the two imaginary solutions are:
+    > -0.208333 +1.18951i
+    > -0.208333 -1.18951i
+    
+    ./computer "4x^2+4x+1=0"
+    > Reduced form: 4X^2+4X+1=0
+    > Polynomial degree: 2
+    > The discriminant is zero, one solution:
+    > -1/2 (-0.5)
